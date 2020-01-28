@@ -3,13 +3,14 @@
  */
 package io.github.gabrielshanahan.onlyinputtypestest
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello world."
-        }
-}
+import kotlin.internal.OnlyInputTypes
 
-fun main(args: Array<String>) {
-    println(App().greeting)
+object Test {
+    inline infix fun <@OnlyInputTypes reified T, U : T> T.shouldBeOnlyInputTypes(any: U?) = println(T::class)
+    inline infix fun <reified T, U : T> T.shouldBe(any: U?) = println(T::class)
+
+    fun doTest() {
+        "Hello" shouldBe 5
+        "Hello" shouldBeOnlyInputTypes 5
+    }
 }
