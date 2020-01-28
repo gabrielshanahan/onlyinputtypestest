@@ -24,9 +24,17 @@ dependencies {
 
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    implementation(kotlin("reflect"))
 }
 
 application {
     // Define the main class for the application.
     mainClassName = "io.github.gabrielshanahan.onlyinputtypestest.AppKt"
+}
+
+tasks {
+    compileKotlin {
+       kotlinOptions.freeCompilerArgs += listOf("-Xallow-kotlin-package")
+    }
 }

@@ -5,7 +5,7 @@ package io.github.gabrielshanahan.onlyinputtypestest
 
 import kotlin.internal.OnlyInputTypes
 
-object Test {
+class App {
     inline infix fun <@OnlyInputTypes reified T, U : T> T.shouldBeOnlyInputTypes(any: U?) = println(T::class)
     inline infix fun <reified T, U : T> T.shouldBe(any: U?) = println(T::class)
 
@@ -13,4 +13,8 @@ object Test {
         "Hello" shouldBe 5
         "Hello" shouldBeOnlyInputTypes 5
     }
+}
+
+fun main(args: Array<String>) {
+    App().doTest()
 }
